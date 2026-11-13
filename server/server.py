@@ -1,8 +1,9 @@
 import socket
 import threading
 
-def HandleClient(client_info: tuple) -> None:
-    print('handled client')
+def HandleClient(conn: socket.socket, addr: tuple) -> None:
+    print('handling connection')
+    
 
 def StartServer(args) -> int:
     HOST = '127.0.0.1'
@@ -16,5 +17,5 @@ def StartServer(args) -> int:
         while True:
             conn, addr = s.accept()
             thread = threading.Thread(target=HandleClient, args=(conn, addr))
-
+            thread.start()
         return -1
